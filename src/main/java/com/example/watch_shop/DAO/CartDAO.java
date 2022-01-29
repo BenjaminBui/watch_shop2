@@ -11,9 +11,11 @@ public class CartDAO {
 
     public ArrayList<CartDTO> getAllCart(int id) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         ArrayList<CartDTO> listCart = new ArrayList<>();
-        Statement stm = ConnectionDB.connection("jdbc:postgresql://ec2-34-204-128-77.compute-1.amazonaws.com:5432/dd5l00fa1krcdm?sslmode=require", "qjaieifndzmzyu", "8f60aac5eaaeb88521943ed215fedc7468454c879d5110297d2c6e13a5632ab0")
-                .createStatement();
-        ResultSet rs = stm.executeQuery("SELECT * FROM cart WHERE AccID='" + id + "' && CartStatus = 1");
+        PreparedStatement stm = ConnectionDB.connection("jdbc:postgresql://ec2-34-204-128-77.compute-1.amazonaws.com:5432/dd5l00fa1krcdm?sslmode=require", "qjaieifndzmzyu", "8f60aac5eaaeb88521943ed215fedc7468454c879d5110297d2c6e13a5632ab0")
+                .prepareStatement("SELECT * FROM cart WHERE AccID = ? AND CartStatus = ?");
+        stm.setInt(1,id);
+        stm.setInt(2,1);
+        ResultSet rs = stm.executeQuery();
         while (rs.next()) {
             CartDTO dto = new CartDTO();
             dto.setId(rs.getInt(1));
@@ -69,7 +71,7 @@ public class CartDAO {
             stm.executeUpdate();
             stm.close();
         } else {
-            PreparedStatement stm = cnn.prepareStatement("INSERT INTO cart VALUE (?,?,?,?,?)");
+            PreparedStatement stm = cnn.prepareStatement("INSERT INTO cart VALUES (?,?,?,?,?)");
             stm.setInt(1, 0);
             stm.setInt(2, AccID);
             stm.setInt(3, ProductID);
@@ -107,7 +109,7 @@ public class CartDAO {
         stm.setInt(3, AccID);
         stm.executeUpdate();
         stm.close();
-
+        cnn.close();
     }
     public void Checkout(int AccID) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         Connection cnn = ConnectionDB.connection("jdbc:postgresql://ec2-34-204-128-77.compute-1.amazonaws.com:5432/dd5l00fa1krcdm?sslmode=require", "qjaieifndzmzyu", "8f60aac5eaaeb88521943ed215fedc7468454c879d5110297d2c6e13a5632ab0");
@@ -116,6 +118,6 @@ public class CartDAO {
         stm.setInt(2, AccID);
         stm.executeUpdate();
         stm.close();
-
+        cnn.close();
     }
 }

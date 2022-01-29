@@ -12,7 +12,7 @@ public class ConnectionDB {
     * String Pass: used to import the password
     * */
     public static Connection connection(String url, String name, String pass) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
-            Class.forName("org.postgresql.Driver").newInstance();
+            Class.forName("org.postgresql.Driver");
             Connection cnn = DriverManager.getConnection(url, name, pass);
         return cnn;
     }
