@@ -30,6 +30,8 @@ public class ProductDAO {
                 dto.setProductStatus(rs.getInt(7));
                 listProduct.add(dto);
             }
+            stm.close();
+            rs.close();
         } catch (Exception ex) {
             System.out.println(ex);
         }

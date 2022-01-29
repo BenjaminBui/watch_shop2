@@ -32,6 +32,8 @@ public class AccountDAO {
 
                 listAcc.add(dto);
             }
+            stm.close();
+            rs.close();
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -59,6 +61,8 @@ public class AccountDAO {
 
                 listAcc.add(dto);
             }
+            stm.close();
+            rs.close();
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -91,6 +95,8 @@ public class AccountDAO {
                 stmt.setInt(4, Acc_Id);
                 stmt.executeUpdate();
 
+                stmt.close();
+                conn.close();
             } catch (Exception e) {
                 System.out.println(e);
             }
@@ -102,6 +108,8 @@ public class AccountDAO {
                 stmt.setInt(2,Acc_Id);
                 stmt.executeUpdate();
 
+                stmt.close();
+                conn.close();
             } catch (Exception e) {
                 System.out.println(e);
             }

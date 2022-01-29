@@ -24,6 +24,8 @@ public class CartDAO {
 
             listCart.add(dto);
         }
+        stm.close();
+        rs.close();
         return listCart;
     }
 
@@ -65,6 +67,7 @@ public class CartDAO {
             stm.setInt(2, ProductID);
             stm.setInt(3, AccID);
             stm.executeUpdate();
+            stm.close();
         } else {
             PreparedStatement stm = cnn.prepareStatement("INSERT INTO cart VALUE (?,?,?,?,?)");
             stm.setInt(1, 0);
@@ -73,7 +76,9 @@ public class CartDAO {
             stm.setInt(4, 1);
             stm.setInt(5, 1);
             stm.executeUpdate();
+            stm.close();
         }
+        cnn.close();
     }
 
     public int getQuanity(int ProductID, int AccID) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
@@ -101,6 +106,7 @@ public class CartDAO {
         stm.setInt(2, ProductID);
         stm.setInt(3, AccID);
         stm.executeUpdate();
+        stm.close();
 
     }
     public void Checkout(int AccID) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
@@ -109,6 +115,7 @@ public class CartDAO {
         stm.setInt(1, 2);
         stm.setInt(2, AccID);
         stm.executeUpdate();
+        stm.close();
 
     }
 }
