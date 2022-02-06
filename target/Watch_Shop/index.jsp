@@ -471,48 +471,7 @@
 
 
 <!-- footer section -->
-<section class="info_section layout_padding">
-    <div class="container">
-        <div class="info_items">
-            <a href="">
-                <div class="item ">
-                    <div class="img-box box-1">
-                        <img src="" alt="">
-                    </div>
-                    <div class="detail-box">
-                        <p>
-                            Lorem Ipsum is simply dummy text
-                        </p>
-                    </div>
-                </div>
-            </a>
-            <a href="">
-                <div class="item ">
-                    <div class="img-box box-2">
-                        <img src="" alt="">
-                    </div>
-                    <div class="detail-box">
-                        <p>
-                            +84 123456789
-                        </p>
-                    </div>
-                </div>
-            </a>
-            <a href="">
-                <div class="item ">
-                    <div class="img-box box-3">
-                        <img src="" alt="">
-                    </div>
-                    <div class="detail-box">
-                        <p>
-                            WatchShopWP@gmail.com
-                        </p>
-                    </div>
-                </div>
-            </a>
-        </div>
-    </div>
-</section>
+
 <!-- footer section -->
 
 <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>

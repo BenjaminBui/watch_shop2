@@ -112,14 +112,13 @@
                             About our watch
                         </h3>
                         <p class="">
-                            It is a long established fact that a reader will be distracted by the readable content of a page when
-                            looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution
-                            of
-                            letters, as opposed to using 'Content here, content here', making it
+                            Addres: Số 10-12 Đinh Tiên Hoàng, Phường Bến Nghé, Quận 1, TP.HCM. <br>
+                            Phone: (08) 38293828 <br>
+                            Email: thuvientth@gmail.com
                         </p>
                         <div>
                             <a href="product.jsp">
-                                Read More
+                                Shop now
                             </a>
                         </div>
                     </div>
@@ -139,61 +138,11 @@
 
 
 <!-- info section -->
-<section class="info_section layout_padding">
-    <div class="container">
-        <div class="info_items">
-            <a href="">
-                <div class="item ">
-                    <div class="img-box box-1">
-                        <img src="" alt="">
-                    </div>
-                    <div class="detail-box">
-                        <p>
-                            Lorem Ipsum is simply dummy text
-                        </p>
-                    </div>
-                </div>
-            </a>
-            <a href="">
-                <div class="item ">
-                    <div class="img-box box-2">
-                        <img src="" alt="">
-                    </div>
-                    <div class="detail-box">
-                        <p>
-                            +84 123456789
-                        </p>
-                    </div>
-                </div>
-            </a>
-            <a href="">
-                <div class="item ">
-                    <div class="img-box box-3">
-                        <img src="" alt="">
-                    </div>
-                    <div class="detail-box">
-                        <p>
-                            WatchShopWP@gmail.com
-                        </p>
-                    </div>
-                </div>
-            </a>
-        </div>
-    </div>
-</section>
 
 
 
 <!-- end info_section -->
 
-<!-- footer section -->
-<section class="container-fluid footer_section">
-    <p>
-        © 2020 All Rights Reserved By
-        <a href="https://html.design/">Free Html Templates</a>
-    </p>
-</section>
-<!-- footer section -->
 
 <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
 <script type="text/javascript" src="js/bootstrap.js"></script>
