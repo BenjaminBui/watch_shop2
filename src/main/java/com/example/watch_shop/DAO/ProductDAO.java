@@ -9,6 +9,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 public class ProductDAO {
+    static ConnectionDB conn = new ConnectionDB();
 
     /*
     * Function use for get all product in db
@@ -16,9 +17,7 @@ public class ProductDAO {
     public ArrayList<ProductDTO> GetAllProduct() {
         ArrayList <ProductDTO> listProduct = new ArrayList<>();
         try {
-            Statement stm = ConnectionDB.connection("jdbc:postgresql://ec2-34-204-128-77.compute-1.amazonaws.com:5432/dd5l00fa1krcdm?sslmode=require", "qjaieifndzmzyu", "8f60aac5eaaeb88521943ed215fedc7468454c879d5110297d2c6e13a5632ab0")
-                    .createStatement();
-            ResultSet rs = stm.executeQuery("SELECT * FROM product");
+            ResultSet rs = conn.SQLQuery("SELECT * FROM product");
             while (rs.next()){
                 ProductDTO dto = new ProductDTO();
                 dto.setProductID(rs.getInt(1));
@@ -30,8 +29,6 @@ public class ProductDAO {
                 dto.setProductStatus(rs.getInt(7));
                 listProduct.add(dto);
             }
-            stm.close();
-            rs.close();
         } catch (Exception ex) {
             System.out.println(ex);
         }

@@ -8,14 +8,11 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class CartDAO {
+    static ConnectionDB conn = new ConnectionDB();
 
     public ArrayList<CartDTO> getAllCart(int id) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         ArrayList<CartDTO> listCart = new ArrayList<>();
-        PreparedStatement stm = ConnectionDB.connection("jdbc:postgresql://ec2-34-204-128-77.compute-1.amazonaws.com:5432/dd5l00fa1krcdm?sslmode=require", "qjaieifndzmzyu", "8f60aac5eaaeb88521943ed215fedc7468454c879d5110297d2c6e13a5632ab0")
-                .prepareStatement("SELECT * FROM cart WHERE AccID = ? AND CartStatus = ?");
-        stm.setInt(1,id);
-        stm.setInt(2,1);
-        ResultSet rs = stm.executeQuery();
+        ResultSet rs = conn.SQLQuery("SELECT * FROM cart WHERE AccID = "+id+" AND CartStatus = 1");
         while (rs.next()) {
             CartDTO dto = new CartDTO();
             dto.setId(rs.getInt(1));
@@ -26,8 +23,6 @@ public class CartDAO {
 
             listCart.add(dto);
         }
-        stm.close();
-        rs.close();
         return listCart;
     }
 
@@ -48,7 +43,6 @@ public class CartDAO {
     }
 
     public void AddToCart(int ProductID, int AccID) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
-        Connection cnn = ConnectionDB.connection("jdbc:postgresql://ec2-34-204-128-77.compute-1.amazonaws.com:5432/dd5l00fa1krcdm?sslmode=require", "qjaieifndzmzyu", "8f60aac5eaaeb88521943ed215fedc7468454c879d5110297d2c6e13a5632ab0");
         boolean check = false;
         int quanity = 0;
         ArrayList<CartDTO> listCart = getAllCart(AccID);
@@ -64,23 +58,12 @@ public class CartDAO {
         }
 
         if (check) {
-            PreparedStatement stm = cnn.prepareStatement("UPDATE cart SET CartQuanity= ? WHERE ProductID=? AND AccID=?");
-            stm.setInt(1, quanity + 1);
-            stm.setInt(2, ProductID);
-            stm.setInt(3, AccID);
-            stm.executeUpdate();
-            stm.close();
+            String query = "UPDATE cart SET CartQuanity= "+(quanity + 1)+" WHERE ProductID="+ProductID+" AND AccID="+AccID;
+            conn.SQLNonQuery(query);
         } else {
-            PreparedStatement stm = cnn.prepareStatement("INSERT INTO cart VALUES (?,?,?,?,?)");
-            stm.setInt(1, 0);
-            stm.setInt(2, AccID);
-            stm.setInt(3, ProductID);
-            stm.setInt(4, 1);
-            stm.setInt(5, 1);
-            stm.executeUpdate();
-            stm.close();
+            String query = "INSERT INTO cart VALUES ("+0+","+AccID+","+ProductID+",1,1)";
+            conn.SQLNonQuery(query);
         }
-        cnn.close();
     }
 
     public int getQuanity(int ProductID, int AccID) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
@@ -96,28 +79,17 @@ public class CartDAO {
 
     public void UpdateQuanity(int ProductID, int AccID, String Operator) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         ArrayList<CartDTO> listCart = getAllCart(AccID);
-        Connection cnn = ConnectionDB.connection("jdbc:postgresql://ec2-34-204-128-77.compute-1.amazonaws.com:5432/dd5l00fa1krcdm?sslmode=require", "qjaieifndzmzyu", "8f60aac5eaaeb88521943ed215fedc7468454c879d5110297d2c6e13a5632ab0");
         int quanity = getQuanity(ProductID, AccID);
         if (Operator.equals("+")) {
             quanity++;
         } else {
             quanity--;
         }
-        PreparedStatement stm = cnn.prepareStatement("UPDATE cart SET CartQuanity= ? WHERE ProductID=? AND AccID=?");
-        stm.setInt(1, quanity);
-        stm.setInt(2, ProductID);
-        stm.setInt(3, AccID);
-        stm.executeUpdate();
-        stm.close();
-        cnn.close();
+        String query = "UPDATE cart SET CartQuanity= "+quanity+" WHERE ProductID="+ProductID+" AND AccID="+AccID;
+        conn.SQLNonQuery(query);
     }
     public void Checkout(int AccID) throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
-        Connection cnn = ConnectionDB.connection("jdbc:postgresql://ec2-34-204-128-77.compute-1.amazonaws.com:5432/dd5l00fa1krcdm?sslmode=require", "qjaieifndzmzyu", "8f60aac5eaaeb88521943ed215fedc7468454c879d5110297d2c6e13a5632ab0");
-        PreparedStatement stm = cnn.prepareStatement("UPDATE cart SET CartStatus= ? WHERE CartStatus=1 AND AccID=?");
-        stm.setInt(1, 2);
-        stm.setInt(2, AccID);
-        stm.executeUpdate();
-        stm.close();
-        cnn.close();
+        String query = "UPDATE cart SET CartStatus= 2 WHERE CartStatus=1 AND AccID="+AccID;
+        conn.SQLNonQuery(query);
     }
 }
